@@ -9,14 +9,17 @@
 #include <string>
 #include "account.h"
 
+using std::string;
+using std::vector;
+
 
 class Bank
 {
 public:
     Bank();
     void readFileData();
-    std::vector<string> splitLines(const std::string &line, const char delimiter);
-    void loadAccounts(std::map<std::string, std::vector<std::string>>& accountData);
+    vector<string> splitLines(const string &line, const char delimiter);
+    void loadAccounts(std::map<string, vector<string>>& accountData);
     void openAccount();
     void getAccountBalance();
     void depositToAccount();

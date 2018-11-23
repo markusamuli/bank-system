@@ -17,9 +17,9 @@ Bank::Bank()
 }
 
 
-std::vector<std::string> Bank::splitLines(const string& line, const char delimiter)
+vector<string> Bank::splitLines(const string& line, const char delimiter)
 {
-    std::vector<string> result;
+    vector<string> result;
     string tmp = line;
 
     while (tmp.find(delimiter) != string::npos) {
