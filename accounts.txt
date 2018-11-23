@@ -1,0 +1,4 @@
+123456789;Ryöti;Markus;10000
+541745711;Doe;John;5000
+917641961;Duck;Donald;2000
+098029750;Meikäläinen;Matti;30000
