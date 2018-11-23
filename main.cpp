@@ -18,7 +18,7 @@ void printOptions() {
 int main()
 {
 
-    std::cout << "===== Welcome to Markus' Bank =====\n\n" << std::endl;
+    std::cout << "\n===== Welcome to Markus' Bank =====\n\n" << std::endl;
 
     Bank bank;
 
@@ -36,15 +36,19 @@ int main()
         switch (optionSelection)
         {
            case '1':
-            std::cout << "Hello there" << std::endl;
+            bank.openAccount();
             break;
            case '2':
+            bank.getAccountBalance();
             break;
            case '3':
+            bank.depositToAccount();
             break;
            case '4':
+            bank.doAccountWithDrawal();
             break;
            case '5':
+            bank.closeAnAccount();
             break;
            case '6':
             bank.showAllAccounts();

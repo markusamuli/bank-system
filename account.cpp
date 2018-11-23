@@ -32,3 +32,17 @@ long double Account::getAccountBalance()
 {
     return accountBalance_;
 }
+
+void Account::transferFromAccount(long double& amount)
+{
+    std::cout << "Amount before transfer " << accountBalance_ << std::endl;
+    accountBalance_ -= amount;
+    std::cout << "Amount after transfer " << accountBalance_ << std::endl;
+}
+
+void Account::transferToAccount(long double& amount)
+{
+    std::cout << "Amount before transfer " << accountBalance_ << std::endl;
+    accountBalance_ += amount;
+    std::cout << "Amount after transfer " << accountBalance_ << std::endl;
+}

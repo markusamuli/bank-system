@@ -15,6 +15,8 @@ public:
     std::string getFirstName();
     std::string getLastName();
     long double getAccountBalance();
+    void transferFromAccount(long double& amount);
+    void transferToAccount(long double& amount);
 private:
     long int accountID_;
     string accountHolderFirstName_;
