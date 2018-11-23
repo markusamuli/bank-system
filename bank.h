@@ -24,8 +24,9 @@ public:
     bool checkIfAccountExists(long int& accountid);
     void openAccount();
     void closeAnAccount();
-    void getAccountBalance();
-    void depositToAccount();
+    void checkAccountBalance();
+    void doAccountTransfer();
+    void doAccountDeposit();
     void doAccountWithDrawal();
     void printAccountInfo(Account& account);
     void showAllAccounts();

@@ -6,11 +6,12 @@ void printOptions() {
     std::cout << "Select a wanted option:" << std::endl;
     std::cout << "1 Open an Account" << std::endl;
     std::cout << "2 Balance Enquiry" << std::endl;
-    std::cout << "3 Deposit" << std::endl;
+    std::cout << "3 Do Transfer to Another Account" << std::endl;
+    std::cout << "4 Deposit" << std::endl;
     std::cout << "4 Withdrawal" << std::endl;
-    std::cout << "5 Close an Account" << std::endl;
-    std::cout << "6 Show All Accounts" << std::endl;
-    std::cout << "7 Quit" << std::endl;
+    std::cout << "6 Close an Account" << std::endl;
+    std::cout << "7 Show All Accounts" << std::endl;
+    std::cout << "8 Quit" << std::endl;
     std::cout << "" << std::endl;
 }
 
@@ -18,7 +19,7 @@ void printOptions() {
 int main()
 {
 
-    std::cout << "\n===== Welcome to Markus' Bank =====\n\n" << std::endl;
+    std::cout << "\n===== Welcome to the Bank =====\n\n" << std::endl;
 
     Bank bank;
 
@@ -39,21 +40,23 @@ int main()
             bank.openAccount();
             break;
            case '2':
-            bank.getAccountBalance();
+            bank.checkAccountBalance();
             break;
            case '3':
-            bank.depositToAccount();
-            break;
+            bank.doAccountTransfer();
            case '4':
-            bank.doAccountWithDrawal();
+            bank.doAccountDeposit();
             break;
            case '5':
-            bank.closeAnAccount();
+            bank.doAccountWithDrawal();
             break;
            case '6':
-            bank.showAllAccounts();
+            bank.closeAnAccount();
             break;
            case '7':
+            bank.showAllAccounts();
+            break;
+           case '8':
             std::cout << "See You Again!" << std::endl;
             keepWorking = false;
             break;

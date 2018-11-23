@@ -135,7 +135,7 @@ void Bank::closeAnAccount()
 }
 
 
-void Bank::getAccountBalance()
+void Bank::checkAccountBalance()
 {
     long int userInput;
     std::cout << "Enter Your Account ID: ";
@@ -156,7 +156,7 @@ void Bank::getAccountBalance()
 }
 
 
-void Bank::depositToAccount()
+void Bank::doAccountTransfer()
 {
     long int sourceAccount;
     std::cout << "Enter the Account ID Where to Deposit From: ";
@@ -176,8 +176,8 @@ void Bank::depositToAccount()
 
     std::cout << "" << std::endl;
 
-    Account source = accounts_.find(sourceAccount)->second;
-    Account destination = accounts_.find(destinationAccount)->second;
+    Account& source = accounts_.find(sourceAccount)->second;
+    Account& destination = accounts_.find(destinationAccount)->second;
 
     long double sourceBalance = source.getAccountBalance();
 
@@ -188,6 +188,11 @@ void Bank::depositToAccount()
         source.transferFromAccount(transferredSum);
         destination.transferToAccount(transferredSum);
     }
+}
+
+
+void Bank::doAccountDeposit()
+{
 
 }
 
