@@ -8,7 +8,7 @@ void printOptions() {
     std::cout << "2 Balance Enquiry" << std::endl;
     std::cout << "3 Do Transfer to Another Account" << std::endl;
     std::cout << "4 Deposit" << std::endl;
-    std::cout << "4 Withdrawal" << std::endl;
+    std::cout << "5 Withdrawal" << std::endl;
     std::cout << "6 Close an Account" << std::endl;
     std::cout << "7 Show All Accounts" << std::endl;
     std::cout << "8 Quit" << std::endl;
@@ -22,7 +22,6 @@ int main()
     std::cout << "\n===== Welcome to the Bank =====\n\n" << std::endl;
 
     Bank bank;
-
     bool keepWorking = true;
 
     while (keepWorking)
@@ -44,6 +43,7 @@ int main()
             break;
            case '3':
             bank.doAccountTransfer();
+            break;
            case '4':
             bank.doAccountDeposit();
             break;
@@ -61,10 +61,7 @@ int main()
             keepWorking = false;
             break;
         }
-
         std::cout << "" << std::endl;
-
     }
-
     return 0;
 }

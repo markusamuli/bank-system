@@ -158,19 +158,19 @@ void Bank::checkAccountBalance()
 
 void Bank::doAccountTransfer()
 {
-    long int sourceAccount;
+    long int sourceAccount, destinationAccount;
+    long double transferredSum;
+
     std::cout << "Enter the Account ID Where to Deposit From: ";
     std::cin >> sourceAccount;
     bool validSource = checkIfAccountExists(sourceAccount);
     if (!validSource) return;
 
-    long int destinationAccount;
     std::cout << "Enter the Account ID Where to Deposit: ";
     std::cin >> destinationAccount;
     bool validDestination = checkIfAccountExists(destinationAccount);
     if (!validDestination) return;
 
-    long double transferredSum;
     std::cout << "Enter the Amount to Transfer: ";
     std::cin >> transferredSum;
 
@@ -193,13 +193,38 @@ void Bank::doAccountTransfer()
 
 void Bank::doAccountDeposit()
 {
+    long int accountId;
+    long double amount;
 
+    std::cout << "Enter the Account ID Where to Deposit: ";
+    std::cin >> accountId;
+    std::cout << "Enter the Deposited Amount: ";
+    std::cin >> amount;
+
+    Account& account = accounts_.find(accountId)->second;
+    account.transferToAccount(amount);
 }
 
 
 void Bank::doAccountWithDrawal()
 {
+    long int accountId;
+    long double amount;
 
+    std::cout << "Enter the Account ID Where to Withdraw: ";
+    std::cin >> accountId;
+    std::cout << "Enter the Withdrawn Amount: ";
+    std::cin >> amount;
+
+    Account& account = accounts_.find(accountId)->second;
+    long double balance = account.getAccountBalance();
+
+    if (balance >= amount) {
+        account.transferFromAccount(amount);
+    } else {
+        std::cout << "\nBalance Not High Enough to Make Suggested Withdrawal."
+                  << std::endl;
+    }
 }
 
 
