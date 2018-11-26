@@ -131,7 +131,21 @@ void Bank::openAccount()
 
 void Bank::closeAnAccount()
 {
+    long int accountid;
+    std::cout << "Enter Account ID That You Want to Close: ";
+    std::cin >> accountid;
 
+    bool validDestination = checkIfAccountExists(accountid);
+
+    if (!validDestination) {
+        return;
+    } else {
+        std::map<long int, Account>::iterator it;
+        it = accounts_.find(accountid);
+
+        accounts_.erase(it->first);
+        std::cout << "Account is now removed." << std::endl;
+    }
 }
 
 
