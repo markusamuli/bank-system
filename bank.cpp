@@ -119,13 +119,13 @@ void Bank::openAccount()
     Account a(accountid, lastname, firstname, deposit);
     accounts_.insert(std::make_pair(a.getAccountID(), a));
 
+    // TODO
+    //saveToFile(a);
+
     std::cout << "\nCongratulations, New Account is Now Created!\n" 
               << std::endl;
 
     printAccountInfo(a);
-
-    // TODO
-    //saveToFile(a);
 }
 
 
@@ -151,21 +151,23 @@ void Bank::closeAnAccount()
 
 void Bank::checkAccountBalance()
 {
-    long int userInput;
+    long int accountid;
     std::cout << "Enter Your Account ID: ";
-    std::cin >> userInput;
+    std::cin >> accountid;
     std::cout << "" << std::endl;
 
-    std::map<long int, Account>::iterator it;
-    it = accounts_.find(userInput);
+    bool validDestination = checkIfAccountExists(accountid);
 
-    if (it != accounts_.end()) {
-        std::cout << "Account " << userInput << "\n" 
-                  << "Total Balance: "
-                  << accounts_.find(userInput)->second.getAccountBalance() 
-                  << std::endl;
+    if (!validDestination) {
+        return;
     } else {
-        std::cout << "No Account Found With Suggested ID.\n";
+        std::map<long int, Account>::iterator it;
+        it = accounts_.find(accountid);
+
+        std::cout << "Account " << accountid << "\n"
+                  << "Total Balance: "
+                  << accounts_.find(accountid)->second.getAccountBalance()
+                  << std::endl;
     }
 }
 
@@ -207,37 +209,59 @@ void Bank::doAccountTransfer()
 
 void Bank::doAccountDeposit()
 {
-    long int accountId;
+    long int accountid;
     long double amount;
 
     std::cout << "Enter the Account ID Where to Deposit: ";
-    std::cin >> accountId;
-    std::cout << "Enter the Deposited Amount: ";
-    std::cin >> amount;
+    std::cin >> accountid;
 
-    Account& account = accounts_.find(accountId)->second;
-    account.transferToAccount(amount);
+    bool validDestination = checkIfAccountExists(accountid);
+
+    if (!validDestination) {
+        return;
+    } else {
+        std::cout << "Enter the Deposited Amount: ";
+        std::cin >> amount;
+
+        Account& account = accounts_.find(accountid)->second;
+        account.transferToAccount(amount);
+
+        std::cout << amount << " Has Been Deposited to Your Account." << std::endl;
+        std::cout << "Total Balance After Deposit: " <<
+                     account.getAccountBalance() << std::endl;
+    }
 }
 
 
 void Bank::doAccountWithDrawal()
 {
-    long int accountId;
+    long int accountid;
     long double amount;
 
     std::cout << "Enter the Account ID Where to Withdraw: ";
-    std::cin >> accountId;
-    std::cout << "Enter the Withdrawn Amount: ";
-    std::cin >> amount;
+    std::cin >> accountid;
 
-    Account& account = accounts_.find(accountId)->second;
-    long double balance = account.getAccountBalance();
+    bool validDestination = checkIfAccountExists(accountid);
 
-    if (balance >= amount) {
-        account.transferFromAccount(amount);
+    if (!validDestination) {
+        return;
     } else {
-        std::cout << "\nBalance Not High Enough to Make Suggested Withdrawal."
-                  << std::endl;
+        std::cout << "Enter the Withdrawn Amount: ";
+        std::cin >> amount;
+
+        Account& account = accounts_.find(accountid)->second;
+        long double balance = account.getAccountBalance();
+
+        if (balance >= amount) {
+            account.transferFromAccount(amount);
+
+            std::cout << amount << " Has Been Withdrawn from Your Account." << std::endl;
+            std::cout << "Total Balance After Withdraw: " <<
+                         account.getAccountBalance() << std::endl;
+        } else {
+            std::cout << "\nBalance Not High Enough to Make Suggested Withdrawal."
+                      << std::endl;
+        }
     }
 }
 
