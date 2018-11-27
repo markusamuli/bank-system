@@ -9,6 +9,7 @@
 using std::string;
 using std::vector;
 using std::ifstream;
+using std::ofstream;
 
 
 Bank::Bank()
@@ -25,6 +26,7 @@ vector<string> Bank::splitLines(const string& line, const char delimiter)
     while (tmp.find(delimiter) != string::npos) {
         string new_part = tmp.substr(0, tmp.find(delimiter));
         tmp = tmp.substr(tmp.find(delimiter)+1, tmp.size());
+
         if (not new_part.empty()) {
             result.push_back(new_part);
         }
@@ -49,6 +51,7 @@ void Bank::readFileData()
     }
 
     string line;
+
     while (getline(sourceFile, line)) {
         std::vector<string> lineParts = splitLines(line, ';');
         string id = lineParts.at(0);
@@ -66,7 +69,23 @@ void Bank::readFileData()
 
 void Bank::saveToFile(Account& a)
 {
+    ofstream outputFile ("accounts.txt", std::ios_base::app);
 
+    string line;
+
+    if (outputFile.is_open()) {
+        string id = std::to_string(a.getAccountID());
+        string lastName = a.getLastName();
+        string firstName = a.getFirstName();
+        string balance = std::to_string(a.getAccountBalance());
+
+        outputFile << id << ';'
+                   << lastName << ';'
+                   << firstName << ';'
+                   << balance << "\n";
+
+        outputFile.close();
+    }
 }
 
 
@@ -81,6 +100,9 @@ void Bank::loadAccounts(std::map<string, vector<string>>& accountData)
         Account a(id, lastName, firstName, balance);
         accounts_.insert(std::make_pair(a.getAccountID(), a));
     }
+
+    long int largestID = accounts_.rbegin()->first;
+    accountIdCounter_ = ++largestID;
 }
 
 
@@ -119,8 +141,7 @@ void Bank::openAccount()
     Account a(accountid, lastname, firstname, deposit);
     accounts_.insert(std::make_pair(a.getAccountID(), a));
 
-    // TODO
-    //saveToFile(a);
+    saveToFile(a);
 
     std::cout << "\nCongratulations, New Account is Now Created!\n" 
               << std::endl;

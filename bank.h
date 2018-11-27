@@ -32,7 +32,7 @@ public:
     void showAllAccounts();
 private:
     std::map<long int, Account> accounts_;
-    long int accountIdCounter_ = 1000;
+    long int accountIdCounter_;
 };
 
 #endif // BANK_H
